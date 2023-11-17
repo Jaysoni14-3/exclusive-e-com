@@ -3,8 +3,9 @@ import { useState } from "react";
 import searchIcon from "../assets/search-icon.png";
 import heartIcon from "../assets/heart-icon.png";
 import cartIcon from "../assets/cart-icon.png";
-import menuOpenIcon from "../assets/menu.svg";
-import menuCloseIcon from "../assets/close.svg";
+
+import menuOpenIcon from "../assets/menu.png";
+import menuCloseIcon from "../assets/close.png";
 
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
@@ -62,7 +63,7 @@ const NavigationBar = () => {
 
         <div className="movile-nav-icons tablet:hidden">
           <figure onClick={toggleDrawer} className="menu-open">
-            <img src={menuOpenIcon} alt="open moboile menu" />
+            <img className="w-8" src={menuOpenIcon} alt="open moboile menu" />
           </figure>
         </div>
       </header>
@@ -76,7 +77,7 @@ const NavigationBar = () => {
         className="flex flex-col py-6 px-2"
       >
         <figure className="close-nav ms-auto" onClick={toggleDrawer}>
-          <img src={menuCloseIcon} alt="open moboile menu" />
+          <img className="w-8" src={menuCloseIcon} alt="open moboile menu" />
         </figure>
         <nav className="mobile-nav w-full flex flex-col justify-center items-center gap-10">
           <a className="text-black font-poppins text-16px" href="/">

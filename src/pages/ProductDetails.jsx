@@ -4,10 +4,10 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import starIcon from "../assets/star.png";
 import heartIcon from "../assets/heart-icon.png";
-import iconMinus from "../assets/icon-minus.svg";
-import iconPlus from "../assets/icon-plus.svg";
+import iconMinus from "../assets/icon-minus.png";
+import iconPlus from "../assets/icon-plus.png";
 import iconDelivery from "../assets/icon-delivery-black.png";
-import iconReturn from "../assets/icon-return.svg";
+import iconReturn from "../assets/icon-return.png";
 
 import HavicGameControllerImage2 from "../assets/Products/havic-game-controller-2.png";
 import HavicGameControllerImage3 from "../assets/Products/havic-game-controller-3.png";
@@ -171,13 +171,17 @@ const ProductDetails = () => {
           <div className="flex flex-wrap items-center">
             <div className="quantity flex flex-row items-center mt-6">
               <button className="h-[44px] border border-black hover:bg-red overflow-hidden rounded-l-md p-2 transition-colors">
-                <img src={iconMinus} alt="minus icon" />
+                <img
+                  className="w-full h-full"
+                  src={iconMinus}
+                  alt="minus icon"
+                />
               </button>
               <span className="h-[44px] w-20 text-center border-t border-b border-black py-2">
                 {product.quantity}
               </span>
               <button className="h-[44px] border border-black hover:bg-red overflow-hidden rounded-r-md p-2 transition-colors">
-                <img src={iconPlus} alt="plus icon" />
+                <img className="w-full h-full" src={iconPlus} alt="plus icon" />
               </button>
               <button className="bg-red text-textWhite font-medium whitespace-nowrap px-4 sm:px-12 py-[10px] rounded mx-4">
                 Buy Now
