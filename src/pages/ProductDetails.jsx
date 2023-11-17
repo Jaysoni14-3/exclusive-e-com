@@ -120,8 +120,6 @@ const ProductDetails = () => {
     },
   ];
 
-  console.log(relatedProducts);
-
   return (
     <>
       <Breadcrumb
@@ -129,8 +127,8 @@ const ProductDetails = () => {
         previousPage={"Home"}
         currentPage={"Product Detail"}
       />
-      <div className="productdetailspage flex gap-8 mt-20">
-        <div className="left w-1/2">
+      <div className="productdetailspage flex flex-col sm:flex-row gap-8 mt-20">
+        <div className="left sm:w-1/2">
           <ReactImageGallery
             items={product.images}
             thumbnailPosition={"left"}
@@ -141,7 +139,7 @@ const ProductDetails = () => {
             lazyLoad={true}
           />
         </div>
-        <div className="right ps-4 w-1/2">
+        <div className="right ps-4 sm:w-1/2">
           {/* Product name */}
           <div className="product-name">
             <h1 className="text-24px font-semiBold text-black">
@@ -170,15 +168,15 @@ const ProductDetails = () => {
           </div>
           <HorizontalDevider />
           {/* Quantity and buttons */}
-          <div className="flex items-center">
+          <div className="flex flex-wrap items-center">
             <div className="quantity flex flex-row items-center mt-6">
-              <button className="border border-black hover:bg-red overflow-hidden rounded-l-md p-2 transition-colors">
+              <button className="h-[44px] border border-black hover:bg-red overflow-hidden rounded-l-md p-2 transition-colors">
                 <img src={iconMinus} alt="minus icon" />
               </button>
-              <span className="w-20 text-center border-t border-b border-black py-2">
+              <span className="h-[44px] w-20 text-center border-t border-b border-black py-2">
                 {product.quantity}
               </span>
-              <button className="border border-black hover:bg-red overflow-hidden rounded-r-md p-2 transition-colors">
+              <button className="h-[44px] border border-black hover:bg-red overflow-hidden rounded-r-md p-2 transition-colors">
                 <img src={iconPlus} alt="plus icon" />
               </button>
               <button className="bg-red text-textWhite font-medium whitespace-nowrap px-4 sm:px-12 py-[10px] rounded mx-4">
