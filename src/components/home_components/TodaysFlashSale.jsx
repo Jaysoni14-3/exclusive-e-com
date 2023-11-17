@@ -7,7 +7,7 @@ import "swiper/css";
 import { Autoplay } from "swiper/modules";
 
 // Product images
-import HavitGameControllerImage from "../../assets/Products/havic-game-controller.png";
+import HavicGameControllerImage from "../../assets/Products/havic-game-controller.png";
 import KeyboardImage from "../../assets/Products/keyboard.png";
 import MonitorImage from "../../assets/Products/monitor.png";
 import ChairImage from "../../assets/Products/chair.png";
@@ -18,8 +18,8 @@ const TodaysFlashSale = () => {
   const flashSaleProducts = [
     {
       id: 1,
-      name: "HAVIT HV-G92 Gamepad",
-      image: HavitGameControllerImage,
+      name: "Havic HV G-92 Gamepad",
+      image: HavicGameControllerImage,
       imgAlt: "image of a game controller",
       offerPercentage: "-40%",
       currentPrice: "$120",

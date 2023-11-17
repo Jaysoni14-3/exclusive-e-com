@@ -33,12 +33,12 @@ const ProductCard = ({ product }) => {
         </div>
         <div className="ratings-container flex gap-2">
           <div className="star-container flex items-center gap-1">
-            <p>{product.ratings.rate}</p>
+            <p>{product.ratings?.rate}</p>
             <img className="w-5 h-5" src={StarGold} alt="star icon" />
           </div>
           <div className="ratedBy">
             <p className="text-textDarkGray text-14px font-semiBold">
-              ({product.ratings.ratedBy})
+              ({product.ratings?.ratedBy})
             </p>
           </div>
         </div>

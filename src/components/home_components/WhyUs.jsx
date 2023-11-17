@@ -27,15 +27,22 @@ const WhyUs = () => {
   return (
     <div className="why-us mb-[140px] grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
       {whyUsData.map((item, index) => (
-        <div key={index} className="why-us-card flex flex-col justify-center items-center">
+        <div
+          key={index}
+          className="why-us-card flex flex-col justify-center items-center"
+        >
           <div className="icon-container bg-[#2F2E30] rounded-full p-3 mb-6">
             <figure className="image-container bg-black rounded-full p-2">
               <img className="w-10 h-10" src={item.icon} alt={item.alt} />
             </figure>
           </div>
           <div className="text-container flex flex-col gap-2">
-            <p className="text-20px font-semiBold text-black text-center">{item.header}</p>
-            <p className="text-14px font-regular text-black text-center">{item.bodyText}</p>
+            <p className="text-20px font-semiBold text-black text-center">
+              {item.header}
+            </p>
+            <p className="text-14px font-regular text-black text-center">
+              {item.bodyText}
+            </p>
           </div>
         </div>
       ))}

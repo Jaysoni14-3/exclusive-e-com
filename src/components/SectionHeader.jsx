@@ -4,7 +4,7 @@ const SectionHeader = ({ smallHeader, mainHeader, buttonText, buttonType }) => {
       <div className="left-side">
         <div className="flex items-center gap-4">
           <div className="border w-5 h-10 bg-red rounded"></div>
-          <p className="font-semiBold">{smallHeader}</p>
+          <p className="font-semiBold text-red">{smallHeader}</p>
         </div>
         {mainHeader && (
           <h3 className="text-24px leading-tight sm:leading-normal sm:text-36px font-semiBold">
