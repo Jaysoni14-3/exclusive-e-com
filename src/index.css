@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-inter;
+}
+
+p {
+  @apply font-poppins;
+}
+
+.max-container {
+  @apply max-w-1170 mx-auto px-4 desktop:px-0;
+}
+
+input::placeholder {
+  @apply text-12px font-regular text-black;
+}
+
+.footer-input::placeholder {
+  @apply text-16px font-regular text-textWhite;
+}
+
+.swiper-pagination-bullet {
+  background-color: #ffffff;
+}
+
+.red-button {
+  @apply text-textWhite font-medium whitespace-nowrap px-4 sm:px-12 py-4 rounded;
+}
+
+.responsive-big-text {
+  @apply text-36px sm:text-48px text-textWhite leading-tight;
+}
