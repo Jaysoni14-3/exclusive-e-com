@@ -1,12 +1,13 @@
 import SectionHeader from "../SectionHeader";
 
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import ProductCard from "../ProductCard";
 
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const TodaysFlashSale = () => {
   const products = useSelector((state) => state.product);
@@ -51,9 +52,12 @@ const TodaysFlashSale = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <button className="text-textWhite px-12 py-4 bg-red rounded mx-auto">
+        <Link
+          to={"/shop"}
+          className="text-textWhite px-12 py-4 bg-red rounded mx-auto"
+        >
           View All Products
-        </button>
+        </Link>
       </div>
     </div>
   );

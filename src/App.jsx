@@ -13,6 +13,7 @@ import PageNotFound from "./pages/PageNotFound";
 import ProductDetails from "./pages/ProductDetails";
 
 import { Provider } from "react-redux";
+import Shop from "./pages/Shop";
 import store from "./store/store";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product-details/:id" element={<ProductDetails />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/about" element={<About />} />

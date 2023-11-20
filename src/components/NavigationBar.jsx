@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import cartIcon from "../assets/cart-icon.png";
-import heartIcon from "../assets/heart-icon.png";
 import searchIcon from "../assets/search-icon.png";
 
 import menuCloseIcon from "../assets/close.png";
@@ -10,10 +9,12 @@ import menuOpenIcon from "../assets/menu.png";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const location = useLocation();
 
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState);
@@ -25,19 +26,40 @@ const NavigationBar = () => {
 
   return (
     <>
-      <header className="navbar max-container flex items-center justify-between gap-2 mt-10 mb-4">
+      <header className=" navbar max-container flex items-center justify-between gap-2 my-4">
         <Link to="/" className="logo cursor-pointer">
           <h2 className="text-36px font-bold text-black">Exclusive</h2>
         </Link>
 
         <nav className=" hidden tablet:flex gap-12">
-          <Link className="text-black font-poppins text-16px" to="/">
+          <Link
+            className={`${
+              location.pathname === "/"
+                ? "text-red font-semiBold"
+                : "text-black font-poppins text-16px"
+            }`}
+            to="/"
+          >
             Home
           </Link>
-          <Link className="text-black font-poppins text-16px" to="/about">
+          <Link
+            className={`${
+              location.pathname === "/about"
+                ? "text-red font-semiBold"
+                : "text-black font-poppins text-16px"
+            }`}
+            to="/about"
+          >
             About
           </Link>
-          <Link className="text-black font-poppins text-16px" to="/contact">
+          <Link
+            className={`${
+              location.pathname === "/contact"
+                ? "text-red font-semiBold"
+                : "text-black font-poppins text-16px"
+            }`}
+            to="/contact"
+          >
             Contact
           </Link>
         </nav>
@@ -56,9 +78,6 @@ const NavigationBar = () => {
             </figure>
           </div>
           <div className="icons-container flex gap-4">
-            <figure className="w-8 h-8 cursor-pointer">
-              <img className="p-1" src={heartIcon} alt="" />
-            </figure>
             <figure className="w-8 h-8 cursor-pointer relative ">
               <Link to="/cart">
                 <img className="p-1" src={cartIcon} alt="cart icon" />
@@ -89,13 +108,34 @@ const NavigationBar = () => {
           <img className="w-8" src={menuCloseIcon} alt="open moboile menu" />
         </figure>
         <nav className="mobile-nav w-full flex flex-col justify-center items-center gap-10">
-          <Link className="text-black font-poppins text-16px" to="/">
+          <Link
+            className={`${
+              location.pathname === "/"
+                ? "text-red font-semiBold"
+                : "text-black font-poppins text-16px"
+            }`}
+            to="/"
+          >
             Home
           </Link>
-          <Link className="text-black font-poppins text-16px" to="/about">
+          <Link
+            className={`${
+              location.pathname === "/about"
+                ? "text-red font-semiBold"
+                : "text-black font-poppins text-16px"
+            }`}
+            to="/about"
+          >
             About
           </Link>
-          <Link className="text-black font-poppins text-16px" to="/contact">
+          <Link
+            className={`${
+              location.pathname === "/contact"
+                ? "text-red font-semiBold"
+                : "text-black font-poppins text-16px"
+            }`}
+            to="/contact"
+          >
             Contact
           </Link>
         </nav>
@@ -113,9 +153,6 @@ const NavigationBar = () => {
             </figure>
           </div>
           <div className="icons-container flex justify-center items-center gap-4 mt-10">
-            <figure className="w-8 h-8 cursor-pointer">
-              <img className="p-1" src={heartIcon} alt="" />
-            </figure>
             <figure className="w-8 h-8 cursor-pointer">
               <Link to="/cart">
                 <img className="p-1" src={cartIcon} alt="" />

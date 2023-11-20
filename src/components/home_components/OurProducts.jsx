@@ -1,6 +1,6 @@
 import SectionHeader from "../SectionHeader";
 
-import heartImage from "../../assets/heart-icon.png";
+// import heartImage from "../../assets/heart-icon.png";
 import StarGold from "../../assets/star.png";
 
 import { useSelector } from "react-redux";
@@ -34,9 +34,9 @@ const OurProducts = () => {
                   </p>
                 </div>
               )}
-              <div className="favourite-btn absolute top-3 right-3 rounded-full cursor-pointer bg-white p-1">
+              {/* <div className="favourite-btn absolute top-3 right-3 rounded-full cursor-pointer bg-white p-1">
                 <img src={heartImage} className="w-6 h-5" alt="" />
-              </div>
+              </div> */}
               <figure className="image-container flex justify-center overflow-hidden items-center rounded bg-secondary w-full max-w-[270px] h-[250px]">
                 <img
                   className="object-contain object-center w-3/4 h-3/4"
@@ -68,7 +68,9 @@ const OurProducts = () => {
             </Link>
           ))}
         </div>
-        <button className="red-button bg-red mx-auto">View All Products</button>
+        <Link to={"/shop"} className="red-button bg-red mx-auto">
+          View All Products
+        </Link>
       </div>
     </div>
   );

@@ -1,4 +1,6 @@
-const SectionHeader = ({ smallHeader, mainHeader, buttonText, buttonType }) => {
+import { Link } from "react-router-dom";
+
+const SectionHeader = ({ smallHeader, mainHeader, buttonText, buttonLink }) => {
   return (
     <div className="section-header flex items-end justify-between gap-6">
       <div className="left-side">
@@ -14,9 +16,9 @@ const SectionHeader = ({ smallHeader, mainHeader, buttonText, buttonType }) => {
       </div>
       {buttonText && (
         <div className="right-side">
-          <button className={`bg-${buttonType} red-button`}>
+          <Link to={buttonLink} className={`bg-red red-button`}>
             {buttonText}
-          </button>
+          </Link>
         </div>
       )}
     </div>

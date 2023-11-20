@@ -1,6 +1,5 @@
-import StarGold from "../assets/star.png";
-import heartImage from "../assets/heart-icon.png";
 import { Link } from "react-router-dom";
+import StarGold from "../assets/star.png";
 
 const ProductCard = ({ product }) => {
   return (
@@ -15,9 +14,9 @@ const ProductCard = ({ product }) => {
           </p>
         </div>
       )}
-      <div className="favourite-btn absolute top-3 right-3 rounded-full cursor-pointer bg-white p-1">
+      {/* <div className="favourite-btn absolute top-3 right-3 rounded-full cursor-pointer bg-white p-1">
         <img src={heartImage} className="w-6 h-5" alt="" />
-      </div>
+      </div> */}
       <figure className="image-container flex justify-center overflow-hidden items-center rounded bg-secondary w-full max-w-[270px] h-[250px]">
         <img
           className="object-contain object-center w-3/4 h-3/4"

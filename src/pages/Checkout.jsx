@@ -1,12 +1,17 @@
-import { useSelector } from "react-redux";
-import Breadcrumb from "../components/Breadcrumb";
-import HorizontalDevider from "../components/HorizontalDevider";
-import { getCartTotal } from "../store/cartSlice";
+import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
-import bkashImage from "../assets/checkout-images/bkash.png";
-import mastercardImage from "../assets/checkout-images/mastercard.png";
-import visaImage from "../assets/checkout-images/visa.png";
+import { useSelector } from "react-redux";
+
+import Breadcrumb from "../components/Breadcrumb";
+
+import { useEffect, useState } from "react";
+
+import closeIcon from "../assets/close.png";
+import CartProductCard from "../components/CartProductCard";
+import CartTotal from "../components/CartTotal";
+import CartAndPayment from "../components/checkout_components/CartPayment";
+import CheckoutUserDetails from "../components/checkout_components/CheckoutUserDetails";
 
 const Checkout = () => {
   var initialValue;
@@ -26,12 +31,54 @@ const Checkout = () => {
   }
 
   const [userDetails, setUserDetails] = useState(initialValue);
-
   const [isSelected, setIsSelected] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [paymentOption, setPaymentOption] = useState("cashOnDelivery");
 
+  // gettings the cart items from redux store
   const cartItems = useSelector((state) => state.cart);
 
-  var totalAmount = getCartTotal(cartItems);
+  // To prevent the body scroll when the modal is open
+  useEffect(() => {
+    if (modalIsOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = "15px";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+      document.body.style.paddingRight = "0px";
+    };
+  }, [modalIsOpen]);
+
+  // If cart has no items in it the dont allow the user to access the checkout page
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      navigate("/");
+    }
+  }, [cartItems.length, navigate]);
+
+  const onOptionChange = (e) => {
+    setPaymentOption(e.target.value);
+  };
+
+  const date = new Date();
+  const month = date.getUTCMonth();
+  const todayDate = date.getUTCDate();
+  const year = date.getFullYear();
+
+  const orderDate = `${todayDate}/${month}/${year}`;
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+  Modal.setAppElement("#root");
+
+  // const cartItems = useSelector((state) => state.cart);
 
   const handleChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -47,8 +94,18 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = () => {
-    // todo" on submit validate if all the required fields are filled and the change the
-    // route to order placed with the total amount and cart details
+    // todo on submit validate if all the required fields are filled and open the modal
+    if (
+      userDetails.firstName &&
+      userDetails.streetAddress &&
+      userDetails.townCity &&
+      userDetails.phoneNumber &&
+      userDetails.emailAddress
+    ) {
+      openModal();
+    } else {
+      alert("Please fill the marked fields to place an order");
+    }
     console.log(userDetails);
   };
 
@@ -59,240 +116,105 @@ const Checkout = () => {
         previousPage={"Home"}
         currentPage={"Checkout"}
       />
+
       <div className="checkout-wrapper flex gap-8 md:gap-4 flex-col md:flex-row my-10">
         <div className="checkout-details w-full md:w-1/2">
           <h1 className="text-36px font-medium text-black">Billing Details</h1>
-
-          <div className="billing-details-container mt-8 flex flex-col gap-8 w-full max-w-md">
-            <div className="input-field flex flex-col">
-              <label
-                className="text-16px font-regular text-textDarkGray"
-                htmlFor="firstName"
-              >
-                First Name <sup className="text-red">*</sup>
-              </label>
-              <input
-                className="bg-secondary px-4 py-2 rounded"
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={userDetails.firstName}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-field flex flex-col">
-              <label
-                className="text-16px font-regular text-textDarkGray"
-                htmlFor="companyName"
-              >
-                Company Name
-              </label>
-              <input
-                className="bg-secondary px-4 py-2 rounded"
-                type="text"
-                id="companyName"
-                name="companyName"
-                value={userDetails.companyName}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-field flex flex-col">
-              <label
-                className="text-16px font-regular text-textDarkGray"
-                htmlFor="streetAddress"
-              >
-                Street Address <sup className="text-red">*</sup>
-              </label>
-              <input
-                className="bg-secondary px-4 py-2 rounded"
-                type="text"
-                id="streetAddress"
-                name="streetAddress"
-                value={userDetails.streetAddress}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-field flex flex-col">
-              <label
-                className="text-16px font-regular text-textDarkGray"
-                htmlFor="apartment"
-              >
-                Apartment, floor, etc. (optional)
-              </label>
-              <input
-                className="bg-secondary px-4 py-2 rounded"
-                type="text"
-                id="apartment"
-                name="apartment"
-                value={userDetails.apartment}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-field flex flex-col">
-              <label
-                className="text-16px font-regular text-textDarkGray"
-                htmlFor="townCity"
-              >
-                Town/City <sup className="text-red">*</sup>
-              </label>
-              <input
-                className="bg-secondary px-4 py-2 rounded"
-                type="text"
-                id="townCity"
-                name="townCity"
-                value={userDetails.townCity}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-field flex flex-col">
-              <label
-                className="text-16px font-regular text-textDarkGray"
-                htmlFor="phoneNumber"
-              >
-                Phone Number <sup className="text-red">*</sup>
-              </label>
-              <input
-                className="bg-secondary px-4 py-2 rounded"
-                type="number"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={userDetails.phoneNumber}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="input-field flex flex-col">
-              <label
-                className="text-16px font-regular text-textDarkGray"
-                htmlFor="emailAddress"
-              >
-                Email Address <sup className="text-red">*</sup>
-              </label>
-              <input
-                className="bg-secondary px-4 py-2 rounded"
-                type="email"
-                id="emailAddress"
-                name="emailAddress"
-                value={userDetails.emailAddress}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="save-billing-details-container flex items-center gap-4 mt-6">
-            <input
-              type="checkbox"
-              name="save-billing-details"
-              id="save-billing-details"
-              value={isSelected}
-              onChange={handleCheckboxChange}
-            />
-            <label className="select-none" htmlFor="save-billing-details">
-              Save this information for faster check-out next time
-            </label>
-          </div>
+          <CheckoutUserDetails
+            userDetails={userDetails}
+            isSelected={isSelected}
+            handleChange={handleChange}
+            handleCheckboxChange={handleCheckboxChange}
+          />
         </div>
-        <div className="cart-details w-full md:w-1/2 flex flex-col gap-8">
-          <div className="cart-products">
-            {cartItems.map((product) => (
-              <div
-                key={product.id}
-                className="checkout-product-cart flex items-center gap-6 py-2"
-              >
-                <figure className="image-container w-14 h-14 flex justify-center items-center">
-                  <img
-                    className="w-full h-auto"
-                    src={product.image}
-                    alt={product.imgAlt}
-                  />
-                </figure>
-                <div className="producrt-details flex items-center justify-between w-full">
-                  <p className="text-16px text-black font-regular">
-                    {product.name}
-                  </p>
-                  <p className="text-16px text-black font-regular">
-                    ${product.subTotal}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="cart-total">
-            <div className="flex flex-col gap-4">
-              <div className="subtotal-container flex flex-row items-center justify-between">
-                <p className="text-18px font-regular text-black">Subtotal: </p>
-                <p className="text-18px font-regular text-black">
-                  ${totalAmount}
-                </p>
-              </div>
-              <HorizontalDevider />
-              <div className="shipping-container flex flex-row items-center justify-between">
-                <p className="text-18px font-regular text-black">Shipping: </p>
-                <p className="text-18px font-regular text-black">Free</p>
-              </div>
-              <HorizontalDevider />
-              <div className="total-container flex flex-row items-center justify-between">
-                <p className="text-18px font-regular text-black">Total: </p>
-                <p className="text-18px font-regular text-black">
-                  ${totalAmount}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="payment-options flex flex-col gap-8">
-            <div className="bankp-option flex items-center gap-4">
-              <input
-                type="radio"
-                id="bank"
-                name="payment_option"
-                value="bank"
-              />
-              <label htmlFor="bank">Bank</label>
-              <figure className="icon ms-auto">
-                <img className="w-11" src={bkashImage} alt="bkash" />
-              </figure>
-              <figure className="icon">
-                <img className="w-11" src={mastercardImage} alt="mastercard" />
-              </figure>
-              <figure className="icon">
-                <img className="w-11" src={visaImage} alt="visa" />
-              </figure>
-            </div>
-            <div className="cod-option flex items-center gap-4">
-              <input
-                type="radio"
-                id="cashOnDelivery"
-                name="payment_option"
-                value="cashOnDelivery"
-                defaultChecked
-              />
-              <label htmlFor="cashOnDelivery">Cash on delivery</label>
-            </div>
-          </div>
-          <div className="coupon-code flex flex-wrap flex-col items-start sm:items-center sm:flex-row gap-4">
-            <input
-              className="py-4 px-6 border border-black rounded"
-              type="text"
-              id="couponCode"
-              name="couponCode"
-              placeholder="Coupon Code"
-            />
-            <button className=" text-white px-12 py-4 rounded whitespace-nowrap bg-red border border-red">
-              Apply Coupon
-            </button>
-          </div>
+
+        {/* Cart details */}
+        <CartAndPayment
+          handlePlaceOrder={handlePlaceOrder}
+          onOptionChange={onOptionChange}
+          cartItems={cartItems}
+        />
+      </div>
+
+      {/* Modal */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Checkout modal"
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0,0,0,0.85)",
+          },
+        }}
+      >
+        <div className="modal-header flex flex-row items-center justify-between my-2">
+          <h2 className="text-20px">Hello {userDetails.firstName},</h2>
           <button
-            onClick={handlePlaceOrder}
-            className="red-button bg-red  w-max"
+            onClick={closeModal}
+            className="icon-container rounded-full bg-red"
           >
-            Place Order
+            <img className="w-8 p-2 " src={closeIcon} alt="Close icon" />
           </button>
         </div>
-      </div>
+        <hr />
+        <div className="modal-body">
+          <div className="confirmation-message my-4">
+            <p className="text-black opacity-80">
+              Your order has been confirmed and will be shipped within the next
+              two days.
+            </p>
+          </div>
+          {/* <hr /> */}
+          <div className="order-details flex flex-col gap-4 sm:flex-row justify-between my-4">
+            <div className="order-date flex flex-col gap-1">
+              <span className="text-black opacity-50 font-semiBold">
+                Order Date
+              </span>
+              <p>{orderDate}</p>
+            </div>
+            <div className="order-payment flex flex-col gap-1">
+              <span className="text-black opacity-50 font-semiBold">
+                Payment
+              </span>
+              <p>
+                {paymentOption === "cashOnDelivery"
+                  ? "Cash on delivery"
+                  : "Bank payment"}
+              </p>
+            </div>
+            <div className="order-shipping-address flex flex-col gap-1">
+              <span className="text-black opacity-50 font-semiBold">
+                Shipping Address
+              </span>
+              <p>
+                {userDetails.streetAddress}, {userDetails.townCity}
+              </p>
+            </div>
+          </div>
+          <hr />
+          <div className="cart-items">
+            <div className="row"></div>
+            {cartItems.map((product) => (
+              <CartProductCard key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="cart-total max-w-sm ms-auto my-4">
+            <CartTotal />
+          </div>
+          <div className="order-placed-message mt-4">
+            <p className="text-black opacity-80">
+              We&apos;ll be sending a shipping confirmation email when the items
+              shipped successfully
+            </p>
+            <p className="text-14px text-black font-semiBold mt-2">
+              Thank you for shopping with us
+            </p>
+            <p className="text-14px text-black font-semiBold">
+              Exclusive Team.
+            </p>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
