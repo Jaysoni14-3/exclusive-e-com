@@ -19,7 +19,7 @@ p {
   @apply max-w-1170 mx-auto px-4 desktop:px-0;
 }
 
-input::placeholder {
+#search::placeholder {
   @apply text-12px font-regular text-black;
 }
 

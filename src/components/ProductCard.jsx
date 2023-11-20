@@ -1,9 +1,13 @@
 import StarGold from "../assets/star.png";
 import heartImage from "../assets/heart-icon.png";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="product-card relative flex flex-col gap-4 w-full max-w-[270px]">
+    <Link
+      to={`/product-details/${product.id}`}
+      className="product-card relative flex flex-col gap-4 w-full max-w-[270px]"
+    >
       {product.offerPercentage && (
         <div className="offer-percentage absolute top-3 left-3 px-3 py-1 bg-red rounded">
           <p className="text-12px font-regular text-white">
@@ -25,10 +29,10 @@ const ProductCard = ({ product }) => {
         <p className="text-16px font-medium text-black">{product.name}</p>
         <div className="price-container flex items-center gap-3">
           <p className="current-price text-16px font-medium text-red">
-            {product.currentPrice}
+            ${product.currentPrice}
           </p>
           <p className="old-price text-16px line-through font-medium text-textDarkGray">
-            {product.oldPrice}
+            ${product.oldPrice}
           </p>
         </div>
         <div className="ratings-container flex gap-2">
@@ -43,7 +47,7 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

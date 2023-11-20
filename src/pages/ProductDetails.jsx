@@ -2,18 +2,11 @@ import Breadcrumb from "../components/Breadcrumb";
 
 import "react-image-gallery/styles/css/image-gallery.css";
 
-import starIcon from "../assets/star.png";
 import heartIcon from "../assets/heart-icon.png";
-import iconMinus from "../assets/icon-minus.png";
-import iconPlus from "../assets/icon-plus.png";
 import iconDelivery from "../assets/icon-delivery-black.png";
 import iconReturn from "../assets/icon-return.png";
+import starIcon from "../assets/star.png";
 
-import HavicGameControllerImage2 from "../assets/Products/havic-game-controller-2.png";
-import HavicGameControllerImage3 from "../assets/Products/havic-game-controller-3.png";
-import HavicGameControllerImage4 from "../assets/Products/havic-game-controller-4.png";
-import HavicGameControllerImage5 from "../assets/Products/havic-game-controller-5.png";
-import HavicGameControllerImage6 from "../assets/Products/havic-game-controller-6.png";
 import ReactImageGallery from "react-image-gallery";
 import HorizontalDevider from "../components/HorizontalDevider";
 import SectionHeader from "../components/SectionHeader";
@@ -25,45 +18,33 @@ import MonitorImage from "../assets/Products/monitor.png";
 import RgbCoolerImage from "../assets/Products/rgb-liquid-cooler.png";
 import ProductCard from "../components/ProductCard";
 
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addToCart, removeFromCart } from "../store/cartSlice";
+
 const ProductDetails = () => {
-  const product = {
-    id: 1,
-    name: "Havic HV G-92 Gamepad",
-    image: HavicGameControllerImage2,
-    description:
-      "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
-    quantity: 0,
-    images: [
-      {
-        original: HavicGameControllerImage2,
-        thumbnail: HavicGameControllerImage2,
-      },
-      {
-        original: HavicGameControllerImage3,
-        thumbnail: HavicGameControllerImage3,
-      },
-      {
-        original: HavicGameControllerImage4,
-        thumbnail: HavicGameControllerImage4,
-      },
-      {
-        original: HavicGameControllerImage5,
-        thumbnail: HavicGameControllerImage5,
-      },
-      {
-        original: HavicGameControllerImage6,
-        thumbnail: HavicGameControllerImage6,
-      },
-    ],
-    imgAlt: "image of a game controller",
-    offerPercentage: "-40%",
-    currentPrice: "$120",
-    oldPrice: "$160",
-    ratings: {
-      rate: 5,
-      ratedBy: 80,
-    },
-  };
+  const [productInCart, setProductInCart] = useState(false);
+
+  const productId = useParams();
+  // Redux methods
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.product);
+  const cartItems = useSelector((state) => state.cart);
+
+  const product = products.find((item) => item.id === parseInt(productId.id));
+
+  const isProductInCart = cartItems.find(
+    (item) => item.id === parseInt(productId.id)
+  );
+
+  useEffect(() => {
+    if (isProductInCart) {
+      setProductInCart(true);
+    } else {
+      setProductInCart(false);
+    }
+  }, [isProductInCart]);
 
   const relatedProducts = [
     {
@@ -72,8 +53,8 @@ const ProductDetails = () => {
       image: HavicGameControllerImage,
       imgAlt: "image of a game controller",
       offerPercentage: "-40%",
-      currentPrice: "$120",
-      oldPrice: "$160",
+      currentPrice: 120,
+      oldPrice: 160,
       ratings: {
         rate: 5,
         ratedBy: 80,
@@ -85,8 +66,8 @@ const ProductDetails = () => {
       image: KeyboardImage,
       imgAlt: "image of a keyboard",
       offerPercentage: "-35%",
-      currentPrice: "$100",
-      oldPrice: "$130",
+      currentPrice: 100,
+      oldPrice: 130,
       ratings: {
         rate: 4,
         ratedBy: 75,
@@ -98,8 +79,8 @@ const ProductDetails = () => {
       image: MonitorImage,
       imgAlt: "image of a game controller",
       offerPercentage: "-30%",
-      currentPrice: "$370",
-      oldPrice: "$400",
+      currentPrice: 370,
+      oldPrice: 400,
       ratings: {
         rate: 4,
         ratedBy: 99,
@@ -111,8 +92,8 @@ const ProductDetails = () => {
       image: RgbCoolerImage,
       imgAlt: "image of a cpu cooler",
       offerPercentage: "",
-      currentPrice: "$160",
-      oldPrice: "$170",
+      currentPrice: 160,
+      oldPrice: 170,
       ratings: {
         rate: 4,
         ratedBy: 65,
@@ -120,24 +101,45 @@ const ProductDetails = () => {
     },
   ];
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  const handleRemoveFromCart = (productID) => {
+    const confirmMessage = "Do you want to remove this product from your cart?";
+    if (confirm(confirmMessage)) {
+      dispatch(removeFromCart(parseInt(productID.id)));
+    } else {
+      return;
+    }
+  };
+
+  // console.log(cartItems);
+
   return (
     <>
       <Breadcrumb
         linkToPreviousPage={"/"}
         previousPage={"Home"}
-        currentPage={"Product Detail"}
+        currentPage={product.name}
       />
       <div className="productdetailspage flex flex-col sm:flex-row gap-8 mt-20">
         <div className="left sm:w-1/2">
-          <ReactImageGallery
-            items={product.images}
-            thumbnailPosition={"left"}
-            showFullscreenButton={false}
-            showNav={false}
-            thumbnailWidth={"150px"}
-            showPlayButton={false}
-            lazyLoad={true}
-          />
+          {product?.images?.length !== 0 ? (
+            <ReactImageGallery
+              items={product.images}
+              thumbnailPosition={"left"}
+              showFullscreenButton={false}
+              showNav={false}
+              thumbnailWidth={"150px"}
+              showPlayButton={false}
+              lazyLoad={true}
+            />
+          ) : (
+            <figure className="image-container flex items-center justify-center">
+              <img src={product.image} />
+            </figure>
+          )}
         </div>
         <div className="right ps-4 sm:w-1/2">
           {/* Product name */}
@@ -160,7 +162,7 @@ const ProductDetails = () => {
           </div>
           {/* Price */}
           <div className="price mt-4">
-            <h2 className="text-24px text-black">{product.currentPrice}</h2>
+            <h2 className="text-24px text-black">${product.currentPrice}</h2>
           </div>
           {/* Description */}
           <div className="product-description my-6">
@@ -170,20 +172,25 @@ const ProductDetails = () => {
           {/* Quantity and buttons */}
           <div className="flex flex-wrap items-center">
             <div className="quantity flex flex-row items-center mt-6">
-              <button className="h-[44px] border border-black hover:bg-red overflow-hidden rounded-l-md p-2 transition-colors">
-                <img
-                  className="w-full h-full"
-                  src={iconMinus}
-                  alt="minus icon"
-                />
-              </button>
-              <span className="h-[44px] w-20 text-center border-t border-b border-black py-2">
-                {product.quantity}
-              </span>
-              <button className="h-[44px] border border-black hover:bg-red overflow-hidden rounded-r-md p-2 transition-colors">
-                <img className="w-full h-full" src={iconPlus} alt="plus icon" />
-              </button>
-              <button className="bg-red text-textWhite font-medium whitespace-nowrap px-4 sm:px-12 py-[10px] rounded mx-4">
+              {productInCart ? (
+                <>
+                  <button
+                    onClick={() => handleRemoveFromCart(productId)}
+                    className="bg-red text-textWhite font-medium whitespace-nowrap px-4 sm:px-12 py-[10px] rounded mx-4"
+                  >
+                    Remove from cart
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="bg-red text-textWhite font-medium whitespace-nowrap px-4 sm:px-12 py-[10px] rounded mx-4"
+                >
+                  Add to cart
+                </button>
+              )}
+
+              <button className="border border-red text-black font-medium whitespace-nowrap px-4 sm:px-12 py-[10px] rounded mx-4">
                 Buy Now
               </button>
               <button className="border border-black hover:bg-red overflow-hidden rounded p-2 transition-colors">

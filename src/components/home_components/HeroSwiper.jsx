@@ -52,7 +52,7 @@ const HeroSwiper = () => {
         }}
         navigation={false}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mt-10 mb-36 select-none w-full h-full "
+        className="mt-10 mb-[70px] select-none w-full h-full "
       >
         {heroProducts.map((product) => (
           <SwiperSlide key={product.id} className="bg-black h-full">

@@ -1,87 +1,19 @@
 import SectionHeader from "../SectionHeader";
 
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-
 import { Autoplay } from "swiper/modules";
 
-// Product images
-import HavicGameControllerImage from "../../assets/Products/havic-game-controller.png";
-import KeyboardImage from "../../assets/Products/keyboard.png";
-import MonitorImage from "../../assets/Products/monitor.png";
-import ChairImage from "../../assets/Products/chair.png";
-import RgbCoolerImage from "../../assets/Products/rgb-liquid-cooler.png";
 import ProductCard from "../ProductCard";
 
+import { useSelector } from "react-redux";
+
 const TodaysFlashSale = () => {
-  const flashSaleProducts = [
-    {
-      id: 1,
-      name: "Havic HV G-92 Gamepad",
-      image: HavicGameControllerImage,
-      imgAlt: "image of a game controller",
-      offerPercentage: "-40%",
-      currentPrice: "$120",
-      oldPrice: "$160",
-      ratings: {
-        rate: 5,
-        ratedBy: 80,
-      },
-    },
-    {
-      id: 2,
-      name: "AK-900 Wired Keyboard",
-      image: KeyboardImage,
-      imgAlt: "image of a keyboard",
-      offerPercentage: "-35%",
-      currentPrice: "$100",
-      oldPrice: "$130",
-      ratings: {
-        rate: 4,
-        ratedBy: 75,
-      },
-    },
-    {
-      id: 3,
-      name: "IPS LCD Gaming Monitor",
-      image: MonitorImage,
-      imgAlt: "image of a game controller",
-      offerPercentage: "-30%",
-      currentPrice: "$370",
-      oldPrice: "$400",
-      ratings: {
-        rate: 4,
-        ratedBy: 99,
-      },
-    },
-    {
-      id: 4,
-      name: "S-Series Comfort Chair ",
-      image: ChairImage,
-      imgAlt: "image of a chair",
-      offerPercentage: "-25%",
-      currentPrice: "$375",
-      oldPrice: "$400",
-      ratings: {
-        rate: 5,
-        ratedBy: 99,
-      },
-    },
-    {
-      id: 5,
-      name: "RGB liquid CPU Cooler",
-      image: RgbCoolerImage,
-      imgAlt: "image of a cpu cooler",
-      offerPercentage: "-40%",
-      currentPrice: "$160",
-      oldPrice: "$170",
-      ratings: {
-        rate: 4,
-        ratedBy: 65,
-      },
-    },
-  ];
+  const products = useSelector((state) => state.product);
+
+  const flashSaleProducts = products.filter(
+    (product) => product.keyword === "flash-sale"
+  );
 
   return (
     <div>
@@ -108,7 +40,6 @@ const TodaysFlashSale = () => {
             1024: {
               slidesPerView: 4,
             },
-         
           }}
           navigation={false}
           modules={[Autoplay]}

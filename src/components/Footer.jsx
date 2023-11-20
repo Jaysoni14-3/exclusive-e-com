@@ -1,16 +1,17 @@
-import sendIcon from "../assets/icon-send.png";
-import qrCode from "../assets/qrcode.png";
+import { Link } from "react-router-dom";
 import appStore from "../assets/download-appstore.png";
 import playStore from "../assets/download-playstore.png";
+import sendIcon from "../assets/icon-send.png";
+import qrCode from "../assets/qrcode.png";
 
 const Footer = () => {
   return (
     <footer className="footer bg-black pt-20 pb-16">
       <div className="max-container grid gap-8 tablet:grid-cols-2 laptop:grid-cols-4 desktop:grid-cols-5 desktop:gap-12">
         <div className="subscribe-container">
-          <a href="/" className="logo cursor-pointer">
+          <Link to="/" className="logo cursor-pointer">
             <h2 className="text-24px font-bold text-white">Exclusive</h2>
-          </a>
+          </Link>
           <h5 className="text-20px font-medium text-white my-6">Subscribe</h5>
           <p className="text-16px font-regular text-white">
             Get 10% off your first order
