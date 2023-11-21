@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import Breadcrumb from "../components/Breadcrumb";
 import ProductCard from "../components/ProductCard";
+
 const Shop = () => {
   const products = useSelector((state) => state.product);
-    
+
   return (
     <>
       <Breadcrumb
