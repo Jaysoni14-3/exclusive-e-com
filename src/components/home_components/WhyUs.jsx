@@ -1,6 +1,6 @@
-import IconDelivery from "../../assets/icon-delivery.png";
-import IconService from "../../assets/icon-service.png";
-import IconSecure from "../../assets/icon-secure.png";
+import IconService from "../../assets/customer-support.png";
+import IconSecure from "../../assets/security.png";
+import IconDelivery from "../../assets/truck.png";
 
 const WhyUs = () => {
   const whyUsData = [
@@ -32,7 +32,7 @@ const WhyUs = () => {
           className="why-us-card flex flex-col justify-center items-center"
         >
           <div className="icon-container bg-[#2F2E30] rounded-full p-3 mb-6">
-            <figure className="image-container bg-black rounded-full p-2">
+            <figure className="image-container bg-white rounded-full p-2">
               <img className="w-10 h-10" src={item.icon} alt={item.alt} />
             </figure>
           </div>
