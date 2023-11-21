@@ -4,6 +4,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import heartIcon from "../assets/heart-icon.png";
 import iconDelivery from "../assets/icon-delivery-black.png";
+// import iconReturn from "../assets/icon-return.png";
 import iconReturn from "../assets/icon-return.png";
 import starIcon from "../assets/star.png";
 
