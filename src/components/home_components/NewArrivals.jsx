@@ -9,9 +9,9 @@ const NewArrivals = () => {
   return (
     <div className="new-arrival flex flex-col gap-[60px] mt-[70px] mb-[140px]">
       <SectionHeader smallHeader={"Featured"} mainHeader={"New Arrival"} />
-      <div className="section-body flex flex-row gap-[30px]">
+      <div className="section-body flex flex-col lg:flex-row gap-[30px]">
         {/* Playstation */}
-        <div className="left-container rounded relative bg-black md:w-1/2">
+        <div className="left-container rounded relative bg-black w-full lg:w-1/2">
           <figure className="image-container h-full flex justify-center items-end ">
             <img
               className="w-4/5 object-bottom h-auto"
@@ -35,7 +35,7 @@ const NewArrivals = () => {
             </a>
           </div>
         </div>
-        <div className="right-container flex flex-col gap-[30px] md:w-1/2">
+        <div className="right-container flex flex-col gap-[30px] w-full lg:w-1/2">
           {/* Womens collection */}
           <div className="top-container rounded overflow-hidden flex relative bg-[#0D0D0D] w-full">
             <div className="product-description flex flex-col gap-4 absolute left-6 bottom-6">

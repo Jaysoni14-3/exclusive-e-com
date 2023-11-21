@@ -31,7 +31,7 @@ const Footer = () => {
         </div>
         <div className="support-container">
           <div className="section-heading">
-            <h4 className="text-20px text-white">Support</h4>
+            <h4 className="text-20px text-white font-semiBold">Support</h4>
           </div>
           <div className="section-body flex flex-col gap-4 mt-6">
             <p className="address text-textWhite">Mumbai, India</p>
@@ -41,7 +41,7 @@ const Footer = () => {
         </div>
         <div className="account-container">
           <div className="section-heading">
-            <h4 className="text-20px text-white">Account</h4>
+            <h4 className="text-20px text-white font-semiBold">Account</h4>
           </div>
           <div className="section-body flex flex-col gap-4 mt-6">
             <p className="text-textWhite">My Account</p>
@@ -53,18 +53,25 @@ const Footer = () => {
         </div>
         <div className="quickLinks-container">
           <div className="section-heading">
-            <h4 className="text-20px text-white">Quick Link</h4>
+            <h4 className="text-20px text-white font-semiBold">Quick Link</h4>
           </div>
           <div className="section-body flex flex-col gap-4 mt-6">
             <p className="text-textWhite">Privacy Policy</p>
             <p className="text-textWhite">Terms Of Use</p>
             <p className="text-textWhite">FAQ</p>
             <p className="text-textWhite">Contact</p>
+            <Link
+              className="text-textWhite"
+              target="_blank"
+              to={"https://www.flaticon.com/"}
+            >
+              Icons by Flaticon
+            </Link>
           </div>
         </div>
         <div className="download-container">
           <div className="section-heading">
-            <h4 className="text-20px text-white">Download App</h4>
+            <h4 className="text-20px text-white font-semiBold">Download App</h4>
           </div>
           <div className="section-body flex flex-col gap-4 mt-6">
             <p className="text-12px font-medium text-textWhite">
