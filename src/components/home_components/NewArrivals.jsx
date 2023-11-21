@@ -1,9 +1,9 @@
 import SectionHeader from "../SectionHeader";
 
-import PlayStationImage from "../../assets/Products/playstation.png";
-import WomensCollectionImage from "../../assets/Products/womens-collection.png";
 import AmazonSpeaker from "../../assets/Products/amazon-echo.png";
 import GucciPerfume from "../../assets/Products/gucci-perfume.png";
+import PlayStationImage from "../../assets/Products/playstation.png";
+import WomensCollectionImage from "../../assets/Products/womens-collection.png";
 
 const NewArrivals = () => {
   return (
@@ -63,8 +63,8 @@ const NewArrivals = () => {
           </div>
           <div className="bottom-container h-1/2 flex gap-[30px] items-top">
             {/* Speaker collection */}
-            <div className="bottom-left-container rounded relative w-1/2 bg-black">
-              <div className="h-full w-full rounded-full absolute inset-0 bg-[#D9D9D9] blur-3xl z-10 opacity-30"></div>
+            <div className="bottom-left-container rounded relative w-1/2 bg-black min-h-[160px] md:min-h-auto">
+              <div className="h-full w-full rounded-full absolute inset-0 bg-[rgb(217,217,217)] blur-3xl z-10 opacity-30"></div>
               <figure className="image-container flex items-center justify-center h-full">
                 <img
                   className="relative z-20 w-1/2 object-center"
@@ -89,7 +89,7 @@ const NewArrivals = () => {
               </div>
             </div>
             {/* Perfume collection */}
-            <div className="bottom-right-container rounded relative w-1/2 bg-black">
+            <div className="bottom-right-container rounded relative w-1/2 bg-black min-h-[160px] md:min-h-auto">
               <div className="h-full w-full rounded-full absolute inset-0 bg-[#D9D9D9] blur-3xl z-10 opacity-30"></div>
               <figure className="image-container flex items-center justify-center h-full">
                 <img
