@@ -4,8 +4,8 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 import heartIcon from "../assets/heart-icon.png";
 import iconDelivery from "../assets/icon-delivery-black.png";
-// import iconReturn from "../assets/icon-return.png";
-import iconReturn from "../assets/icon-return.png";
+import iconReturn from "../assets/return.png";
+
 import starIcon from "../assets/star.png";
 
 import ReactImageGallery from "react-image-gallery";
@@ -222,7 +222,7 @@ const ProductDetails = () => {
               <figure className="icon-container w-10 h-10">
                 <img
                   src={iconReturn}
-                  className="w-full h-full"
+                  className="w-full h-full p-1"
                   alt="return icon"
                 />
               </figure>
